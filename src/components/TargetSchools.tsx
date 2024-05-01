@@ -31,7 +31,7 @@ export function TargetSchools({ targetSchools }: Props) {
           <TargetSchoolsRanking ranking={ranking} />
           <div className="font-[500] text-[14px] text-[#1B262C]">{schoolName}</div>
           <div className="grow"></div>
-          <TargetSchoolsProbability probability={probability} />
+          <TargetSchoolsProbability schoolId={schoolId} probability={probability} />
         </div>
       ))}
     </div>
