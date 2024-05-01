@@ -10,7 +10,6 @@ export function TargetSchoolsProbability({ schoolId, probability }: Props) {
   const svgRef = useRef(null);
   let isRun = false;
   useEffect(() => {
-    console.log("enter", schoolId);
     if (isRun) {
       return;
     }
