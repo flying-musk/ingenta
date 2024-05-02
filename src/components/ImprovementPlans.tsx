@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ImprovementPlanResponse } from "../../type/type";
 import { ImprovementPlansDonut } from "./ImprovementPlansDonut";
+import { ImprovementPlansProgress } from "./ImprovementPlansProgress";
 
 interface Props {
   improvementPlans: ImprovementPlanResponse | null;
@@ -66,7 +67,9 @@ export function ImprovementPlans({ improvementPlans }: Props) {
         {subjects.map(({ subjectId, subjectName, currentScore, targetScore }) => (
           <div key={subjectId} className="p-[10px] flex gap-[10px] items-center">
             <div className="basis-[0] grow font-[500] text-[14px] text-[#000000]">{subjectName}</div>
-            <div className="basis-[0] grow border border-[turquoise]">bar</div>
+            <div className="w-[130px] h-[12px] flex">
+              <ImprovementPlansProgress currentScore={currentScore} targetScore={targetScore} />
+            </div>
             <div className="font-[500] text-[12px] text-[#1B262C]">
               {currentScore}→{targetScore}
             </div>
