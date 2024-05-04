@@ -36,7 +36,7 @@ export function ImprovementPlans({ improvementPlans }: Props) {
             <div className="font-[900] text-[20px] text-[#7c7da0]">{planProbability * 100}</div>
             <div className="w-[7px] h-[32px]">
               <svg className="grow" xmlns="http://www.w3.org/2000/svg" width="8" height="33" viewBox="0 0 8 33" fill="none">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.80047 5.43465L4.91664 0.439707C4.6603 -0.00428767 4.01945 -0.00428768 3.76311 0.439707L0.879282 5.43465C0.622942 5.87864 0.943368 6.43363 1.45605 6.43363L3.34089 6.43363L3.34089 31.4083C3.34089 31.9601 3.78815 32.4073 4.33988 32.4073C4.8916 32.4073 5.33887 31.9601 5.33887 31.4083L5.33887 6.43363L7.22371 6.43363C7.73639 6.43363 8.05681 5.87864 7.80047 5.43465Z" fill="url(#paint0_linear_21_1649)" />
+                <path fillRule="evenodd" clipRule="evenodd" d="M7.80047 5.43465L4.91664 0.439707C4.6603 -0.00428767 4.01945 -0.00428768 3.76311 0.439707L0.879282 5.43465C0.622942 5.87864 0.943368 6.43363 1.45605 6.43363L3.34089 6.43363L3.34089 31.4083C3.34089 31.9601 3.78815 32.4073 4.33988 32.4073C4.8916 32.4073 5.33887 31.9601 5.33887 31.4083L5.33887 6.43363L7.22371 6.43363C7.73639 6.43363 8.05681 5.87864 7.80047 5.43465Z" fill="url(#paint0_linear_21_1649)" />
                 <defs>
                   <linearGradient id="paint0_linear_21_1649" x1="4.33988" y1="32.4073" x2="4.33988" y2="0.106712" gradientUnits="userSpaceOnUse">
                     <stop stopColor="#9EC8C0" />

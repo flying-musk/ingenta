@@ -23,7 +23,6 @@ export function ImprovementPlansDonut({ currentProbability, planProbability }: P
     let h = 158;
     let outerRadius = w / 2;
     let innerRadius = outerRadius - 12;
-    console.log(outerRadius, innerRadius);
 
     let arc = d3
       .arc()
