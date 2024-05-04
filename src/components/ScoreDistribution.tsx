@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, use } from "react";
 import * as d3 from "d3";
 import { ScoreDistributionResponse } from "../../type/type";
 import { Noto_Sans_JP } from "next/font/google";
@@ -136,6 +136,7 @@ export function ScoreDistribution({ scoreDistribution }: Props) {
       .attr("class", "dot-group")
       .style("transition", "opacity 400ms")
       .style("pointer-events", "bounding-box")
+      .style("cursor", "default")
       .each(function (d) {
         d3.select(this).append("circle").attr("class", "dot").attr("cx", xScale(d.previousScore)).attr("cy", yScale(d.currentScore)).attr("r", 6).attr("fill", "#095EAD").attr("fill-opacity", d.importance);
         d3.select(this)
@@ -162,10 +163,35 @@ export function ScoreDistribution({ scoreDistribution }: Props) {
     <div className="basis-0 grow p-[20px] grid gap-[8px]">
       <div className="font-[700] text-[14px]">成績の分布と重要度</div>
       <div className="font-[500] text-[12px] text-[#1B262C] opacity-50">今回の偏差値</div>
-      <div ref={divRef} className="border border-[pink] flex h-[280px]">
+      <div ref={divRef} className="flex h-[280px]">
         <svg className="grow" viewBox={`0 0 ${width + margin.left + margin.right} 280`} fill="none">
           <g ref={svgRef} transform={`translate(${margin.left},${margin.top})`}></g>
         </svg>
+      </div>
+      <div className="flex justify-between items-start">
+        <div className="mt-[6px] flex flex-col relative">
+          <div className="flex justify-between">
+            {["00", "50", "100"].map((tick) => (
+              <div className="flex flex-col gap-[6px] items-center" key={tick}>
+                <div className="font-[500] text-[9px] text-[#1B262C]">{tick}</div>
+                <div className="border-r border-[black] h-[6px]"></div>
+              </div>
+            ))}
+          </div>
+          <div className="w-[190px] h-[12px] flex">
+            <svg className="grow" viewBox="0 0 189 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect y="12" width="12" height="189" rx="4" transform="rotate(-90 0 12)" fill="url(#paint0_linear_21_2650)" />
+              <defs>
+                <linearGradient id="paint0_linear_21_2650" x1="6" y1="12" x2="6" y2="201" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="white" />
+                  <stop offset="1" stopColor="#0058AA" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div className="absolute right-[-44px] bottom-[0px] font-[500] text-[12px] text-[#000000] opacity-40">重要度</div>
+        </div>
+        <div className="font-[500] text-[12px] text-[#000000] opacity-40">前回の偏差値</div>
       </div>
     </div>
   );
