@@ -91,7 +91,7 @@ export function ScoreDistribution({ scoreDistribution }: Props) {
       .attr("cx", (d) => xScale(d.previousScore))
       .attr("cy", (d) => yScale(d.currentScore))
       .attr("r", 6)
-      .attr("fill", "steelblue")
+      .attr("fill", "#095EAD")
       .attr("fill-opacity", (d) => d.importance);
 
     // Draw labels for data points
@@ -101,8 +101,10 @@ export function ScoreDistribution({ scoreDistribution }: Props) {
       .enter()
       .append("text")
       .attr("class", "dot-label")
+      .attr("fill", "black")
+      .attr("font-size", "12px")
       .attr("x", (d) => xScale(d.previousScore) + 10)
-      .attr("y", (d) => yScale(d.currentScore))
+      .attr("y", (d) => yScale(d.currentScore) + 4.2)
       .text((d) => d.subjectName);
 
     // Draw x-axis
