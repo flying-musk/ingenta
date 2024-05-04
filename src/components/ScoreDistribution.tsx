@@ -51,8 +51,6 @@ export function ScoreDistribution({ scoreDistribution }: Props) {
 
     svg.selectAll("*").remove();
 
-    svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
     // Draw horizontal grid lines
     svg
       .selectAll("line.horizontalGrid")
@@ -80,32 +78,6 @@ export function ScoreDistribution({ scoreDistribution }: Props) {
       .attr("y2", height)
       .style("stroke", "#E1E6F1")
       .style("stroke-opacity", 0.5);
-
-    // Draw circles for data points
-    svg
-      .selectAll(".dot")
-      .data(subjects)
-      .enter()
-      .append("circle")
-      .attr("class", "dot")
-      .attr("cx", (d) => xScale(d.previousScore))
-      .attr("cy", (d) => yScale(d.currentScore))
-      .attr("r", 6)
-      .attr("fill", "#095EAD")
-      .attr("fill-opacity", (d) => d.importance);
-
-    // Draw labels for data points
-    svg
-      .selectAll(".dot-label")
-      .data(subjects)
-      .enter()
-      .append("text")
-      .attr("class", "dot-label")
-      .attr("fill", "black")
-      .attr("font-size", "12px")
-      .attr("x", (d) => xScale(d.previousScore) + 10)
-      .attr("y", (d) => yScale(d.currentScore) + 4.2)
-      .text((d) => d.subjectName);
 
     // Draw x-axis
     svg
@@ -155,6 +127,35 @@ export function ScoreDistribution({ scoreDistribution }: Props) {
       .attr("stroke", "#B0B0B0") // Set stroke color
       .attr("stroke-width", "1px") // Set stroke width
       .attr("stroke-dasharray", "20 3");
+
+    svg
+      .selectAll(".dot-group")
+      .data(subjects)
+      .enter()
+      .append("g")
+      .attr("class", "dot-group")
+      .style("transition", "opacity 400ms")
+      .style("pointer-events", "bounding-box")
+      .each(function (d) {
+        d3.select(this).append("circle").attr("class", "dot").attr("cx", xScale(d.previousScore)).attr("cy", yScale(d.currentScore)).attr("r", 6).attr("fill", "#095EAD").attr("fill-opacity", d.importance);
+        d3.select(this)
+          .append("text")
+          .attr("class", "dot-label")
+          .attr("fill", "black")
+          .attr("font-size", "12px")
+          .attr("x", xScale(d.previousScore) + 10)
+          .attr("y", yScale(d.currentScore) + 4.2)
+          .text(d.subjectName);
+      })
+      .on("mouseenter", function () {
+        // Handle mouse enter event for the group
+        svg.selectAll(".dot-group").attr("opacity", 0.2); // Dim all other dot groups
+        d3.select(this).attr("opacity", 1); // Highlight the hovered group
+      })
+      .on("mouseleave", function () {
+        // Handle mouse leave event for the group
+        svg.selectAll(".dot-group").attr("opacity", "unset"); // Reset opacity of all dot groups
+      });
   }, [subjects, width]);
 
   return (
