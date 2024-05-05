@@ -17,6 +17,9 @@ export function ImprovementPlansProgress({ currentScore, targetScore }: Props) {
 
     const svg = d3.select(svgRef.current);
 
+    //remove all elements in svg first
+    svg.selectAll("*").remove();
+
     svg.append("rect").attr("width", w).attr("height", h).attr("rx", 6).attr("fill", "#9EC8C0").attr("fill-opacity", 0.35);
 
     svg
@@ -35,7 +38,8 @@ export function ImprovementPlansProgress({ currentScore, targetScore }: Props) {
   }, [currentScore, targetScore]);
 
   return (
-    <svg ref={svgRef} className="grow">
+    <svg className="grow">
+      <g ref={svgRef}></g>
       <defs xmlns="http://www.w3.org/2000/svg">
         <linearGradient id="paint3_linear_21_1671" x1="82" y1="12" x2="79.5489" y2="-9.19807" gradientUnits="userSpaceOnUse">
           <stop stopColor="#5B507A" />

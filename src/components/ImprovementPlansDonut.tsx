@@ -49,6 +49,9 @@ export function ImprovementPlansDonut({ currentProbability, planProbability }: P
 
     let svg = d3.select(svgRef.current);
 
+    //remove all elements in svg first
+    svg.selectAll("*").remove();
+
     svg.append("path").attr("d", arc).attr("fill", "#E0E0E0");
 
     svg.append("path").attr("d", planArcLine).attr("fill", 'url("#paint1_linear_21_1645")');
@@ -58,18 +61,17 @@ export function ImprovementPlansDonut({ currentProbability, planProbability }: P
   }, [currentProbability, planProbability]);
   return (
     <svg className="grow">
-      <g ref={svgRef} transform="translate(80,80)">
-        <defs>
-          <linearGradient id="paint0_linear_21_1645" x1="151.93" y1="151.18" x2="20.2841" y2="-15.4344" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#379696" />
-            <stop offset="1" stopColor="#9EC8C0" />
-          </linearGradient>
-          <linearGradient id="paint1_linear_21_1645" x1="151.93" y1="151.18" x2="20.2841" y2="-15.4344" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#5B507A" />
-            <stop offset="1" stopColor="#9EADC8" />
-          </linearGradient>
-        </defs>
-      </g>
+      <g ref={svgRef} transform="translate(80,80)"></g>
+      <defs>
+        <linearGradient id="paint0_linear_21_1645" x1="151.93" y1="151.18" x2="20.2841" y2="-15.4344" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#379696" />
+          <stop offset="1" stopColor="#9EC8C0" />
+        </linearGradient>
+        <linearGradient id="paint1_linear_21_1645" x1="151.93" y1="151.18" x2="20.2841" y2="-15.4344" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#5B507A" />
+          <stop offset="1" stopColor="#9EADC8" />
+        </linearGradient>
+      </defs>
     </svg>
   );
 }
