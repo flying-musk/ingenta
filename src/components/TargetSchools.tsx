@@ -19,6 +19,25 @@ export function TargetSchools({ targetSchools }: Props) {
     })) || []
   );
 
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, ranking: number) => {
+    e.dataTransfer.setData("ranking", ranking.toString());
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>, targetRanking: number) => {
+    e.preventDefault();
+    const droppedRanking = parseInt(e.dataTransfer.getData("ranking"));
+    const updatedSchools = schools.map((school) => ({
+      ...school,
+      ranking: school.ranking === droppedRanking ? targetRanking : droppedRanking < targetRanking && school.ranking > droppedRanking && school.ranking <= targetRanking ? school.ranking - 1 : droppedRanking > targetRanking && school.ranking >= targetRanking && school.ranking < droppedRanking ? school.ranking + 1 : school.ranking,
+    }));
+    setSchools(updatedSchools.sort((a, b) => a.ranking - b.ranking));
+    //should then call api to update the ranking on backend side
+  };
+
   return (
     <div
       className="basis-0 grow p-[20px] grid gap-[8px] max-[1200px]:!bg-none max-[1200px]:border-r-[2px] max-[1200px]:border-r-[#d1d1d1] max-[860px]:border-r-0 max-[860px]:border-b-[2px] max-[860px]:border-b-[#d1d1d1]"
@@ -32,7 +51,7 @@ export function TargetSchools({ targetSchools }: Props) {
         <div className="font-[700] text-[12px] text-[#1B262C] opacity-50">合格率予測</div>
       </div>
       {schools.map(({ schoolId, schoolName, ranking, probability }) => (
-        <div key={schoolId} className={`${ranking === 1 ? "bg-[#9EC8C0]/[.35]" : ""} rounded-[15px] py-[4px] px-[16px] flex items-center gap-[8px]`}>
+        <div key={schoolId} className={`${ranking === 1 ? "bg-[#9EC8C0]/[.35]" : ""} rounded-[15px] py-[4px] px-[16px] flex items-center gap-[8px]`} draggable onDragStart={(e) => handleDragStart(e, ranking)} onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, ranking)}>
           <TargetSchoolsRanking ranking={ranking} />
           <div className="font-[500] text-[14px] text-[#1B262C]">{schoolName}</div>
           <div className="grow"></div>
