@@ -29,13 +29,16 @@ export function ScoreDistribution({ scoreDistribution }: Props) {
   const [width, setWidth] = useState<number>(0);
   const margin = { top: 10, right: 30, bottom: 20, left: 30 };
   const height = 280 - margin.top - margin.bottom;
+  const chartRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     if (!divRef.current) return;
     const updateDimensions = () => {
       if (divRef.current) {
+        chartRef.current?.classList.add("hidden");
         const { clientWidth } = divRef.current;
         setWidth(clientWidth - margin.left - margin.right);
+        chartRef.current?.classList.remove("hidden");
       }
     };
     updateDimensions();
@@ -160,11 +163,18 @@ export function ScoreDistribution({ scoreDistribution }: Props) {
   }, [subjects, width]);
 
   return (
-    <div className="basis-0 grow p-[20px] grid gap-[8px]">
-      <div className="font-[700] text-[14px]">成績の分布と重要度</div>
+    <div className="basis-0 grow p-[20px] grid gap-[8px] max-[1200px]:border-t-[2px] max-[1200px]:border-t-[#d1d1d1] max-[1200px]:col-[_span_2] max-[860px]:col-[unset]">
+      <div className="flex gap-[10px] items-center">
+        <div className="font-[700] text-[14px]">成績の分布と重要度</div>
+        <div className="flex w-[20px] h-[20px]">
+          <svg className="grow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M9.99996 1.66669C5.39996 1.66669 1.66663 5.40002 1.66663 10C1.66663 14.6 5.39996 18.3334 9.99996 18.3334C14.6 18.3334 18.3333 14.6 18.3333 10C18.3333 5.40002 14.6 1.66669 9.99996 1.66669ZM10.8333 14.1667H9.16663V9.16669H10.8333V14.1667ZM10.8333 7.50002H9.16663V5.83335H10.8333V7.50002Z" fill="#BDBDBD" />
+          </svg>
+        </div>
+      </div>
       <div className="font-[500] text-[12px] text-[#1B262C] opacity-50">今回の偏差値</div>
       <div ref={divRef} className="flex h-[280px]">
-        <svg className="grow" viewBox={`0 0 ${width + margin.left + margin.right} 280`} fill="none">
+        <svg ref={chartRef} className="grow" viewBox={`0 0 ${width + margin.left + margin.right} 280`} fill="none">
           <g ref={svgRef} transform={`translate(${margin.left},${margin.top})`}></g>
         </svg>
       </div>
