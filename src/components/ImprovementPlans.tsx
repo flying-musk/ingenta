@@ -27,13 +27,13 @@ export function ImprovementPlans({ improvementPlans }: Props) {
   return (
     <div className="basis-0 grow p-[20px] grid gap-[8px]">
       <div className="font-[700] text-[14px]">改善プラン</div>
-      <div tabIndex={0} ref={buttonRef} className="p-[5px] rounded-[8px] bg-gradient-to-tl from-[#379696] to-[#9EC8C0] backdrop-blur-[2.5px] font-[700] text-[13px] text-[#ffffff] flex justify-center cursor-pointer relative group/plans">
+      <div tabIndex={0} ref={buttonRef} className="p-[5px] rounded-[8px] bg-gradient-to-tl from-[#379696] to-[#9EC8C0] font-[700] text-[13px] text-[#ffffff] flex justify-center cursor-pointer relative group/plans z-[100]">
         現在選択したプラン：{plans[currentPlanIndex].planId}
-        <div className="bg-[#ffffff] z-[400] invisible group-focus-within/plans:visible absolute left-[0px] right-[0px] top-[100%] translate-y-[12px] rounded-[10px] p-[8px] flex flex-col gap-[5px] shadow-[0px_30px_60px_0px_rgba(0,0,0,0.15)] max-h-[480px] overflow-y-auto">
+        <div className="bg-[#ffffff] invisible group-focus-within/plans:visible absolute left-[0px] right-[0px] top-[100%] translate-y-[12px] rounded-[10px] p-[8px] cursor-default flex flex-col gap-[5px] shadow-[0px_30px_60px_0px_rgba(0,0,0,0.15)] max-h-[480px] overflow-y-auto">
           {plans.map(({ planId }, index) => (
             <div
               key={planId}
-              className="py-[5px] px-[16px] rounded-[15px] font-[500] text-[#000000] text-[13px] hover:bg-[#ddece9]"
+              className={`${index === currentPlanIndex ? "pointer-events-none bg-[#ddece9]" : ""} cursor-pointer py-[5px] px-[16px] rounded-[15px] font-[500] text-[#000000] text-[13px] hover:bg-[#ddece9]`}
               onClick={() => {
                 setCurrentPlanIndex(index);
                 buttonRef.current?.blur();
