@@ -24,14 +24,14 @@ export function TargetSchoolsProbability({ schoolId, probability }: Props) {
     let outerRadius = w / 2;
     let innerRadius = outerRadius - 6.5;
 
-    let arc = d3
+    let arc: any = d3
       .arc()
       .innerRadius(innerRadius)
       .outerRadius(outerRadius)
       .startAngle(0)
       .endAngle(2 * Math.PI);
 
-    let arcLine = d3
+    let arcLine: any = d3
       .arc()
       .innerRadius(innerRadius)
       .outerRadius(outerRadius)

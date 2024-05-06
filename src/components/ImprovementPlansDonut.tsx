@@ -24,14 +24,14 @@ export function ImprovementPlansDonut({ currentProbability, planProbability }: P
     let outerRadius = w / 2;
     let innerRadius = outerRadius - 12;
 
-    let arc = d3
+    let arc: any = d3
       .arc()
       .innerRadius(72)
       .outerRadius(73)
       .startAngle(0)
       .endAngle(2 * Math.PI);
 
-    let planArcLine = d3
+    let planArcLine: any = d3
       .arc()
       .innerRadius(innerRadius)
       .outerRadius(outerRadius)
@@ -39,7 +39,7 @@ export function ImprovementPlansDonut({ currentProbability, planProbability }: P
       .startAngle(Math.PI / 4)
       .endAngle(2 * Math.PI * planProbability);
 
-    let currentArcLine = d3
+    let currentArcLine: any = d3
       .arc()
       .innerRadius(innerRadius)
       .outerRadius(outerRadius)
