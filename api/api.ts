@@ -1,6 +1,7 @@
 import { TargetSchoolsResponse, ImprovementPlanResponse, ScoreDistributionResponse } from "../type/type";
 
-const domain = "https://fe-asgmt.ingenta.io/analysis";
+// const domain = "https://fe-asgmt.ingenta.io/analysis";
+const domain = "https://asia-east1-ingenta-api.cloudfunctions.net";
 
 export const getTargetSchools = async (): Promise<{ data: TargetSchoolsResponse }> => {
   const data = await fetch(`${domain}/target_schools`, {
